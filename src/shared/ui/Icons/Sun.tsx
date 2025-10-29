@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box } from "@mui/material";
-import { useTheme } from "@mui/material/styles"; // ⬅️ правильный импорт
+import { useTheme } from "@mui/material/styles"; 
 
 export function Sun(props: React.SVGProps<SVGSVGElement>) {
   const theme = useTheme();

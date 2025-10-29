@@ -1,6 +1,6 @@
 import { Box, Button, useTheme} from "@mui/material"
 import { mainPages } from "@/shared/config/navigation";
-// import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 export default function NavigationButtons(){
      const theme = useTheme();
      const isLight = theme.palette.mode === "light";
@@ -11,9 +11,9 @@ export default function NavigationButtons(){
 <Box sx={{ display: "flex", gap: 2 }}>
             {mainPages.map((page) => (
               <Button
-               // key={page.id}
-                // component={RouterLink}
-               // to={page.href}
+               key={page.id}
+                 component={RouterLink}
+               to={page.href}
                 sx={{
                   color: textColor,
                   textTransform: "none",
