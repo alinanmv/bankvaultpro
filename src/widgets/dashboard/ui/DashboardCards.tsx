@@ -34,7 +34,7 @@ export default function DashboardCards() {
       sx={{ 
         display: 'flex', 
         flexWrap: 'wrap', 
-        gap: 2,
+        justifyContent: 'space-between',
         width: '100%',
         alignItems: 'stretch', 
       }}

@@ -33,13 +33,13 @@ export default function DashCard({ title, value, description, icon: Icon }: Dash
     >
       <CardContent sx={{ p: 0, flexGrow: 1 }}> 
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb:0  }}>
-          <Typography variant="subtitle2" >
+          <Typography variant="subtitle2" sx={{fontSize:"14px"}}>
             {title}
           </Typography>
-          <Icon sx={{ fontSize: 20, opacity: 0.7 }} />
+          <Icon sx={{ fontSize: 18, opacity: 0.7 }} />
         </Box>
 
-        <Typography variant="h4" fontWeight={700} mb={1} sx={{mt:1}}>
+        <Typography variant="h5" fontWeight={700} mb={1} sx={{m:0, mt:1}}>
           {value}
         </Typography>
 
