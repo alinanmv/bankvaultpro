@@ -5,16 +5,15 @@ import { type SxProps, useTheme } from "@mui/material/styles";
 
 interface LoginCardProps {
   title?: string;
-  footer?: React.ReactNode;
   description?: string;
   width?: number | string;
   height?: number | string;
   borderRadius?: number | string;
   padding?: number | string;
   children?: React.ReactNode;
+  icon?: React.ReactNode; 
   sx?: SxProps;
 }
-
 
 export default function DefaultCard({
   title,
@@ -24,6 +23,7 @@ export default function DefaultCard({
   borderRadius = "12px",
   padding = 3,
   children,
+  icon, // ← получили
   sx,
 }: LoginCardProps) {
   const theme = useTheme();
@@ -31,11 +31,10 @@ export default function DefaultCard({
   return (
     <Box
       sx={{
-        width: "100%",         
+        width: "100%",
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-start", 
-
+        alignItems: "flex-start",
       }}
     >
       <Card
@@ -49,33 +48,55 @@ export default function DefaultCard({
           backgroundColor: theme.palette.background.paper,
           color: theme.palette.text.primary,
           display: "flex",
-          flexDirection: "column", 
-          paddingBottom:0,
-          alignItems: "flex-start", 
+          flexDirection: "column",
+          alignItems: "flex-start",
           justifyContent: "flex-start",
           textAlign: "left",
           ...sx,
         }}
       >
-        {title && (
-          <Typography
-            variant="h5"
-            fontWeight={600}
+        {(title || icon) && (
+          <Box
             sx={{
-        
-              fontFamily: "'Merriweather', 'Times New Roman', serif",
-              width: "100%",         
+              display: "flex",
+              alignItems: "center",
+              gap: 1.2, // расстояние между иконкой и заголовком
+              width: "100%",
             }}
           >
-            {title}
-          </Typography>
+            {icon && (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  svg: { width: 22, height: 22 }, // default размер svg
+                }}
+              >
+                {icon}
+              </Box>
+            )}
+
+            {title && (
+              <Typography
+                variant="h5"
+                fontWeight={600}
+                sx={{
+                  fontFamily: "'Merriweather', 'Times New Roman', serif",
+                }}
+              >
+                {title}
+              </Typography>
+            )}
+          </Box>
         )}
 
         {description && (
-          <Typography  color="text.secondary" sx={{fontSize:"12px", }}>
+          <Typography color="text.secondary" sx={{ fontSize: "12px", mt:0 }}>
             {description}
           </Typography>
         )}
+
         {children}
       </Card>
     </Box>

@@ -24,6 +24,17 @@ export default function TransactionBar({
 }: Props) {
   const theme = useTheme();
 
+const COLORS = {
+  success: {
+    light: "hsl(168 55% 45%)", 
+    dark:  "hsl(168 40% 32%)", 
+  },
+  failed: {
+    light: "hsl(4 85% 65%)", 
+    dark:  "hsl(4 70% 45%)", 
+  },
+} as const;
+const mode = theme.palette.mode; 
   
   const { success, failed } = React.useMemo(() => {
     const randInt = (min: number, max: number) =>
@@ -47,21 +58,27 @@ export default function TransactionBar({
     return { success: successArr, failed: failedArr };
   }, [providers.length, totalRange[0], totalRange[1], successRateRange[0], successRateRange[1]]);
 
-  const successColor = theme.palette.success.main;
-  const failedColor = theme.palette.error.main;
+  const successColor = COLORS.success[mode];
+  const failedColor = COLORS.failed[mode];
 
   const valueFormatter = (v: number | null) =>
     v == null ? "" : new Intl.NumberFormat("en-US").format(v);
 
   return (
     <BarChart
-      xAxis={[
-        {
-          data: providers,
-          disableTicks: true,
-          disableLine: true,
-        },
-      ]}
+       xAxis={[
+    {
+      data: providers,
+      disableTicks: true,
+      disableLine: true,
+    },
+  ]}
+
+  slotProps={{
+    legend: {
+      position: { vertical: "bottom", horizontal: "center" }, 
+    },
+  }}
       series={[
         {
           data: success,
@@ -79,10 +96,9 @@ export default function TransactionBar({
         },
       ]}
       height={height}
-      yAxis={[{disableLine: true}]}                                
-      margin={{ top: 0, right: 0, bottom: 0, left: 0 }} 
-      borderRadius={6}
-      sx={{ width: "100%", p: 0, ...sx }}
+      yAxis={[{disableLine: true, disableTicks: true,}]}                                
+    borderRadius={6}
+      sx={{ width: "100%", p: 0,paddingTop:0, ...sx }}
     />
   );
 }

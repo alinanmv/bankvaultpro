@@ -1,12 +1,14 @@
 import DefaultCard from "@/shared/ui/Card/Card";
 import ProfitByMonthBar from "@/shared/ui/Graphs/ProfitBar";
+import { Box } from "@mui/material";
  export default function ProfitChart(){
     return(
 <DefaultCard
   title="Company Overview"
   width="100%"
-  height={550}
+  height={445}
 >
+   <Box sx={{display:"flex", alignItems:"center", width:"100%",mt:2}}>
   <ProfitByMonthBar currency="USD"
   locale="en-US"
   data = {[
@@ -24,6 +26,7 @@ import ProfitByMonthBar from "@/shared/ui/Graphs/ProfitBar";
   { month: "Dec", profit: 28500 },
 ]}
 />
+</Box>
 </DefaultCard>
 
     );
