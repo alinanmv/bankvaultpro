@@ -13,6 +13,7 @@ interface LoginCardProps {
   children?: React.ReactNode;
   icon?: React.ReactNode; 
   sx?: SxProps;
+  titleSx?: SxProps;
 }
 
 export default function DefaultCard({
@@ -25,6 +26,7 @@ export default function DefaultCard({
   children,
   icon, // ← получили
   sx,
+  titleSx
 }: LoginCardProps) {
   const theme = useTheme();
 
@@ -81,8 +83,10 @@ export default function DefaultCard({
               <Typography
                 variant="h5"
                 fontWeight={600}
+                
                 sx={{
                   fontFamily: "'Merriweather', 'Times New Roman', serif",
+                    ...(titleSx ?? {})
                 }}
               >
                 {title}
