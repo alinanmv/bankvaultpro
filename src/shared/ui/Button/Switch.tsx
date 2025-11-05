@@ -8,11 +8,11 @@ const IOSMonoSwitchRoot = styled((props: SwitchProps) => (
 ))(({ theme }) => {
   const isLight = theme.palette.mode === "light";
 
-  const trackOn = isLight ? "#000" : "#fff";   // когда включен
-  const trackOff = "#d9d9d9";                 // когда выключен (всегда светло-серый)
+  const trackOn = isLight ? "#000" : "#fff"; // когда включен
+  const trackOff = "#d9d9d9"; // когда выключен (всегда светло-серый)
 
-  const thumbOn = isLight ? "#fff" : "#000";   // кружок при on
-  const thumbOff = isLight ? "#fff" : "#000";  // кружок при off (тот же)
+  const thumbOn = isLight ? "#fff" : "#000"; // кружок при on
+  const thumbOff = isLight ? "#fff" : "#000"; // кружок при off (тот же)
 
   const disabledOpacity = theme.palette.action.disabledOpacity;
 
@@ -61,7 +61,7 @@ const IOSMonoSwitchRoot = styled((props: SwitchProps) => (
     // Track
     [`& .${switchClasses.track}`]: {
       borderRadius: 28 / 2,
-      backgroundColor: trackOff,  // OFF state always light gray
+      backgroundColor: trackOff, // OFF state always light gray
       opacity: 1,
       transition: theme.transitions.create(["background-color", "opacity"], {
         duration: 200,

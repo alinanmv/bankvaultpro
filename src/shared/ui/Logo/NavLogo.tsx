@@ -1,11 +1,12 @@
-import { Logo } from '@/shared/ui/Logo/Logo';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Logo } from "@/shared/ui/Logo/Logo";
+import { Box, Typography, useTheme } from "@mui/material";
 
 export default function NavigationLogo() {
   const theme = useTheme();
-  const textColor = theme.palette.mode === 'light'
-    ? theme.palette.text.primary
-    : theme.palette.grey[100];
+  const textColor =
+    theme.palette.mode === "light"
+      ? theme.palette.text.primary
+      : theme.palette.grey[100];
 
   return (
     <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>

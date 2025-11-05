@@ -1,5 +1,16 @@
-import React, { createContext, useContext, useMemo, useState, useEffect } from "react";
-import { createTheme, ThemeProvider, CssBaseline, useMediaQuery } from "@mui/material";
+import React, {
+  createContext,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
+import {
+  createTheme,
+  ThemeProvider,
+  CssBaseline,
+  useMediaQuery,
+} from "@mui/material";
 
 type ThemeSetting = "light" | "dark" | "system";
 type Mode = "light" | "dark";
@@ -23,7 +34,8 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
   const [setting, setSetting] = useState<ThemeSetting>("system");
 
   useEffect(() => {
-    const saved = (localStorage.getItem("themeSetting") as ThemeSetting) || "system";
+    const saved =
+      (localStorage.getItem("themeSetting") as ThemeSetting) || "system";
     setSetting(saved);
   }, []);
 
@@ -40,7 +52,6 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
           background: {
             default: mode === "light" ? "#f5f5f5" : "#0d0d0d",
             paper: mode === "light" ? "#ffffff" : "#0d0d0d",
-           
           },
         },
         shape: { borderRadius: 10 },
@@ -50,7 +61,7 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
           h1: { fontWeight: 700, fontSize: "2rem", lineHeight: 1.2 },
         },
       }),
-    [mode]
+    [mode],
   );
 
   const toggle = () => setSetting((s) => (s === "dark" ? "light" : "dark"));

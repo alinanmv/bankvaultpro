@@ -5,9 +5,9 @@ export interface Transaction {
   name: string;
   email: string;
   cardBrand: CardBrand;
-  cardNumber: string;   // raw digits
+  cardNumber: string; // raw digits
   success: boolean;
-  date: string;         // ISO
+  date: string; // ISO
   amountCents: number;
-  currency: string;     // e.g. "USD"
+  currency: string; // e.g. "USD"
 }

@@ -34,7 +34,11 @@ export default function SettingSelect({
         </Typography>
 
         {description && (
-          <Typography variant="body2" color="text.secondary" sx={{ fontSize: "12px"}}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontSize: "12px" }}
+          >
             {description}
           </Typography>
         )}

@@ -10,30 +10,15 @@ import {
 import type { SelectChangeEvent } from "@mui/material/Select";
 import type { SxProps } from "@mui/material/styles";
 
-type Value = string | number | "";
-
-export type Option =
-  | string
-  | number
-  | { label: React.ReactNode; value: string | number; disabled?: boolean };
-
-type Normalized = { label: React.ReactNode; value: string | number; disabled?: boolean };
-
-function normalizeOptions(options: Option[]): Normalized[] {
-  return options.map((opt) =>
-    typeof opt === "string" || typeof opt === "number"
-      ? { label: String(opt), value: opt }
-      : opt
-  );
-}
+type Value = string;
 
 export interface GenericSelectProps {
   id?: string;
   label: string; // текст над селектом
-  value: Value;
+  value: Value; // контролируемое значение
   onChange: (value: Value) => void;
-  options: Option[];
-  placeholder?: string; // disabled пункт
+  options: string[]; // просто массив строк
+  placeholder?: string; // показывается, когда value === ""
   fullWidth?: boolean;
   disabled?: boolean;
   error?: boolean;
@@ -58,25 +43,17 @@ export function GenericSelect({
   const labelId = `${baseId}-label`;
   const selectId = baseId;
 
-  const items = React.useMemo(() => normalizeOptions(options), [options]);
-
-  // Если value пустое — выбираем первый option как дефолт
-  React.useEffect(() => {
-    if ((value === "" || value === undefined || value === null) && items.length > 0) {
-      onChange(items[0].value as Value);
-    }
-  }, [items, value, onChange]);
-
   const handleChange = (e: SelectChangeEvent<Value>) => {
-    const raw = e.target.value as Value; // MUI отдаёт string, но мы нормализуем ниже
-    // Находим настоящий объект по строковому представлению значения,
-    // чтобы корректно вернуть number, если опция была числом.
-    const matched = items.find((i) => String(i.value) === String(raw));
-    onChange((matched?.value as Value) ?? raw);
+    onChange(e.target.value as Value);
   };
 
   return (
-    <FormControl fullWidth={fullWidth} disabled={disabled} error={error} sx={sx}>
+    <FormControl
+      fullWidth={fullWidth}
+      disabled={disabled}
+      error={error}
+      sx={sx}
+    >
       <FormLabel
         id={labelId}
         sx={{ mb: 0.5, color: "text.primary", fontSize: 14, fontWeight: 400 }}
@@ -90,13 +67,12 @@ export function GenericSelect({
         value={value}
         onChange={handleChange}
         displayEmpty={Boolean(placeholder)}
-        sx={{ height: 40, fontSize:"15px"  }}
+        sx={{ height: 40, fontSize: "15px" }}
         renderValue={(val) => {
-          if ((val === "" || val === undefined) && placeholder) {
+          if (val === "" && placeholder) {
             return <Box sx={{ color: "text.disabled" }}>{placeholder}</Box>;
           }
-          const found = items.find((i) => String(i.value) === String(val));
-          return (found?.label ?? String(val)) as React.ReactNode;
+          return val;
         }}
       >
         {placeholder && (
@@ -104,9 +80,10 @@ export function GenericSelect({
             {placeholder}
           </MenuItem>
         )}
-        {items.map((opt) => (
-          <MenuItem key={String(opt.value)} value={opt.value} disabled={opt.disabled} sx={{fontSize:"15px"}}>
-            {opt.label}
+
+        {options.map((opt) => (
+          <MenuItem key={opt} value={opt} sx={{ fontSize: "15px" }}>
+            {opt}
           </MenuItem>
         ))}
       </Select>

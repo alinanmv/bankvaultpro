@@ -1,4 +1,3 @@
-
 import { Button, type ButtonProps } from "@mui/material";
 import { useTheme, type SxProps, type Theme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
@@ -16,9 +15,9 @@ export default function ViewAllButton({ sx, ...buttonProps }: Props) {
 
   return (
     <Button
-      onClick={handleClick}              
+      onClick={handleClick}
       variant="contained"
-      {...buttonProps}                    
+      {...buttonProps}
       sx={{
         display: "flex",
         alignItems: "center",
@@ -30,10 +29,10 @@ export default function ViewAllButton({ sx, ...buttonProps }: Props) {
         bgcolor: isDark ? "#fff" : "#000",
         color: isDark ? "#000" : "#fff",
         "&:hover": { bgcolor: isDark ? "grey.200" : "grey.800" },
-        ...sx,                             
+        ...sx,
       }}
     >
       View All
-    </Button>                              
+    </Button>
   );
 }

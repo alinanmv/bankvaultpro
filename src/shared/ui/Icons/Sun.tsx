@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Box } from "@mui/material";
-import { useTheme } from "@mui/material/styles"; 
+import { useTheme } from "@mui/material/styles";
 
 export function Sun(props: React.SVGProps<SVGSVGElement>) {
   const theme = useTheme();
-  
+
   const color =
     theme.palette.mode === "dark"
       ? theme.palette.common.white

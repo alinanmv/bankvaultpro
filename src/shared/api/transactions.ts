@@ -1,4 +1,7 @@
-import type { Transaction, CardBrand } from "@/entities/transaction/model/types";
+import type {
+  Transaction,
+  CardBrand,
+} from "@/entities/transaction/model/types";
 import type { TransactionStatus } from "@/features/transactions/TransactionsTable";
 
 const brands: CardBrand[] = ["Uzcard", "Humo", "Visa", "MasterCard"];
@@ -12,7 +15,9 @@ function pick<T>(arr: T[]): T {
   return arr[rand(0, arr.length - 1)];
 }
 
-export async function fetchTransactionsMock(count = 64): Promise<Transaction[]> {
+export async function fetchTransactionsMock(
+  count = 64,
+): Promise<Transaction[]> {
   await new Promise((r) => setTimeout(r, 400)); // имитация API задержки
   const now = Date.now();
 

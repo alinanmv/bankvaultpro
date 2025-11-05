@@ -18,19 +18,19 @@ export default function StatusButton({
 
   const backgroundColor = isOperational
     ? theme.palette.mode === "light"
-      ? theme.palette.grey[900]        
-      : theme.palette.common.white     
+      ? theme.palette.grey[900]
+      : theme.palette.common.white
     : isDegraded
-    ? theme.palette.error.main
-    : theme.palette.action.disabledBackground;
+      ? theme.palette.error.main
+      : theme.palette.action.disabledBackground;
 
   const textColor = isOperational
     ? theme.palette.mode === "light"
-      ? theme.palette.common.white     
-      : theme.palette.grey[900]        
+      ? theme.palette.common.white
+      : theme.palette.grey[900]
     : isDegraded
-    ? theme.palette.common.white
-    : theme.palette.text.disabled;
+      ? theme.palette.common.white
+      : theme.palette.text.disabled;
 
   return (
     <Button

@@ -9,7 +9,7 @@ export default function Dollar(props: SvgIconProps) {
       {...props}
       viewBox="0 0 24 24"
       sx={{
-        color: theme.palette.grey[500], 
+        color: theme.palette.grey[500],
         ...props.sx,
       }}
     >

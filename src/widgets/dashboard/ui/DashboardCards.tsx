@@ -1,46 +1,44 @@
-import Box from "@mui/material/Box";              
+import Box from "@mui/material/Box";
 import DashCard from "@/shared/ui/Card/DashCard";
 import Dollar from "@/shared/ui/Icons/Dollar";
 import CardIcon from "@/shared/ui/Icons/CardIcon";
-import User from "@/shared/ui/Icons/User"
+import User from "@/shared/ui/Icons/User";
 import TrendUpIcon from "@/shared/ui/Icons/TrendUp";
 
 export default function DashboardCards() {
   // Общие стили для Box, который оборачивает каждую карточку
   const cardWrapperStyles = {
     // Flex-элемент для 1/4 ширины на md и выше, с учетом spacing (gap)
-    flex: '0 0 calc(25% - 16px)', // 25% ширины минус половина gap с каждой стороны
-    maxWidth: 'calc(25% - 16px)',
-    
+    flex: "0 0 calc(25% - 16px)", // 25% ширины минус половина gap с каждой стороны
+    maxWidth: "calc(25% - 16px)",
+
     // Адаптивность для sm (2 колонки)
-    '@media (max-width: 900px)': {
-      flex: '0 0 calc(50% - 16px)',
-      maxWidth: 'calc(50% - 16px)',
-    },
-    
-    // Адаптивность для xs (1 колонка)
-    '@media (max-width: 600px)': {
-      flex: '0 0 100%',
-      maxWidth: '100%',
+    "@media (max-width: 900px)": {
+      flex: "0 0 calc(50% - 16px)",
+      maxWidth: "calc(50% - 16px)",
     },
 
-  
-    height: '100%',
-    display: 'flex', 
+    // Адаптивность для xs (1 колонка)
+    "@media (max-width: 600px)": {
+      flex: "0 0 100%",
+      maxWidth: "100%",
+    },
+
+    height: "100%",
+    display: "flex",
   };
 
   return (
-    <Box 
-      sx={{ 
-        display: 'flex', 
-        flexWrap: 'wrap', 
-        justifyContent: 'space-between',
-        width: '100%',
-        alignItems: 'stretch', 
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        width: "100%",
+        alignItems: "stretch",
       }}
     >
-
-      <Box sx={cardWrapperStyles}> 
+      <Box sx={cardWrapperStyles}>
         <DashCard
           title="Total Revenue"
           value="$4,523,189.87"
@@ -48,7 +46,6 @@ export default function DashboardCards() {
           icon={Dollar}
         />
       </Box>
-
 
       <Box sx={cardWrapperStyles}>
         <DashCard
@@ -59,7 +56,6 @@ export default function DashboardCards() {
         />
       </Box>
 
-   
       <Box sx={cardWrapperStyles}>
         <DashCard
           title="Transactions"
@@ -68,7 +64,6 @@ export default function DashboardCards() {
           icon={CardIcon}
         />
       </Box>
-
 
       <Box sx={cardWrapperStyles}>
         <DashCard

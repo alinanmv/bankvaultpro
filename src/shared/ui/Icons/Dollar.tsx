@@ -1,4 +1,3 @@
-
 import SvgIcon, { type SvgIconProps } from "@mui/material/SvgIcon";
 
 export default function Dollar(props: SvgIconProps) {

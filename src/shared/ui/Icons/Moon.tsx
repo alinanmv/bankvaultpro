@@ -7,8 +7,8 @@ export function Moon(props: React.SVGProps<SVGSVGElement>) {
 
   const color =
     theme.palette.mode === "dark"
-      ? theme.palette.common.white    // белый в тёмной теме
-      : theme.palette.text.primary;   // тёмный в светлой теме
+      ? theme.palette.common.white // белый в тёмной теме
+      : theme.palette.text.primary; // тёмный в светлой теме
 
   return (
     <Box component="span" sx={{ display: "inline-flex", lineHeight: 0, color }}>

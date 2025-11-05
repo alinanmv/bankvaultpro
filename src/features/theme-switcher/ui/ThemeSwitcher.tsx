@@ -4,19 +4,19 @@ import ThemeSelect from "@/shared/ui/Theme/ThemeSelect";
 import { Sun } from "@/shared/ui/Icons/Sun";
 import { Moon } from "@/shared/ui/Icons/Moon";
 import { useThemeMode } from "@/app/providers/theme";
-import {Box} from "@mui/material";
-export function ThemeSwitcher(props:any) {
+import { Box } from "@mui/material";
+export function ThemeSwitcher(props: any) {
   const { setting } = useThemeMode();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
   return (
     <>
-    <Box sx={props.sx}>
-      <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
-        {setting === "dark" ? <Moon /> : <Sun />}
-      </IconButton>
-</Box>
+      <Box sx={props.sx}>
+        <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+          {setting === "dark" ? <Moon /> : <Sun />}
+        </IconButton>
+      </Box>
       <ThemeSelect
         open={open}
         onClose={() => setAnchorEl(null)}

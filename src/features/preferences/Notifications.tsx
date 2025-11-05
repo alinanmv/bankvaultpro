@@ -21,7 +21,6 @@ export default function Notification() {
       <SettingRow
         title="Push Notifications"
         description="Get push notifications on your registered devices."
-       
       />
 
       <SettingSelect

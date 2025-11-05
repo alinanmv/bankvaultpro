@@ -36,7 +36,7 @@ export type TransactionRow = {
   cardBrand: string;
   cardNumber: string;
   status: TransactionStatus;
-  date: string;          // ISO
+  date: string; // ISO
   amountCents: number;
   currency: string;
 };
@@ -65,7 +65,10 @@ export default function TransactionTable({
   const [activeRow, setActiveRow] = React.useState<TransactionRow | null>(null);
   const openMenu = Boolean(menuAnchor);
 
-  const handleMenuOpen = (e: React.MouseEvent<HTMLButtonElement>, row: TransactionRow) => {
+  const handleMenuOpen = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    row: TransactionRow,
+  ) => {
     setActiveRow(row);
     setMenuAnchor(e.currentTarget);
   };
@@ -82,7 +85,10 @@ export default function TransactionTable({
       handleMenuClose();
     }
   };
-  const handleRetry = () => { if (activeRow) onRetry?.(activeRow); handleMenuClose(); };
+  const handleRetry = () => {
+    if (activeRow) onRetry?.(activeRow);
+    handleMenuClose();
+  };
   const handleDelete = () => {
     if (!activeRow) return;
     setData((prev) => prev.filter((r) => r.id !== activeRow.id));
@@ -98,9 +104,23 @@ export default function TransactionTable({
       headerName: "Customer",
       ...common,
       renderCell: (p) => (
-        <Box sx={{ display: "flex", flexDirection: "column", justifyContent:"center", height:"100%", paddingLeft:1}}>
-          <Typography variant="body2" fontWeight={600} sx={{}}>{p.row.name}</Typography>
-          <Typography variant="caption" color="text.secondary" sx={{ mt: 0.25 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            height: "100%",
+            paddingLeft: 1,
+          }}
+        >
+          <Typography variant="body2" fontWeight={600} sx={{}}>
+            {p.row.name}
+          </Typography>
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ mt: 0.25 }}
+          >
             {p.row.email}
           </Typography>
         </Box>
@@ -126,19 +146,27 @@ export default function TransactionTable({
       headerName: "Status",
       ...common,
       renderCell: (p) => {
-        const colorStyles: Record<TransactionStatus, { bg: string; text: string }> = {
-          failed:    { bg: "error.main", text: "#fff" },
-          completed: { bg: "#000",       text: "#fff" },
-          pending:   { bg: "grey.300",   text: "#000" },
+        const colorStyles: Record<
+          TransactionStatus,
+          { bg: string; text: string }
+        > = {
+          failed: { bg: "error.main", text: "#fff" },
+          completed: { bg: "#000", text: "#fff" },
+          pending: { bg: "grey.300", text: "#000" },
         };
         const s = colorStyles[p.row.status];
         return (
           <Box
             component="span"
             sx={{
-              px: 1, py: 0.5, borderRadius: 1,
-              bgcolor: s.bg, color: s.text,
-              fontSize: 12, fontWeight: 600, textTransform: "capitalize",
+              px: 1,
+              py: 0.5,
+              borderRadius: 1,
+              bgcolor: s.bg,
+              color: s.text,
+              fontSize: 12,
+              fontWeight: 600,
+              textTransform: "capitalize",
             }}
           >
             {p.row.status}
@@ -159,7 +187,8 @@ export default function TransactionTable({
       type: "number",
       align: "right",
       headerAlign: "right",
-      renderCell: (p) => formatAmount(p.row.amountCents, p.row.currency || "USD"),
+      renderCell: (p) =>
+        formatAmount(p.row.amountCents, p.row.currency || "USD"),
     },
     {
       field: "__actions",
@@ -190,16 +219,22 @@ export default function TransactionTable({
       ]}
     >
       {isLoading && (
-        <Typography sx={{ p: 2, display: "flex", alignItems: "center", gap: 1 }}>
+        <Typography
+          sx={{ p: 2, display: "flex", alignItems: "center", gap: 1 }}
+        >
           <CircularProgress size={18} /> Loading transactions…
         </Typography>
       )}
-      {error && <Typography color="error" sx={{ p: 2 }}>{error}</Typography>}
+      {error && (
+        <Typography color="error" sx={{ p: 2 }}>
+          {error}
+        </Typography>
+      )}
 
       <DataGrid
         rows={data}
         columns={columns}
-        rowHeight={70}   
+        rowHeight={70}
         getRowId={(r) => r.id}
         disableRowSelectionOnClick
         pageSizeOptions={[10, 25, 50, 100]}
@@ -208,11 +243,9 @@ export default function TransactionTable({
           sorting: { sortModel: [{ field: "date", sort: "desc" }] },
         }}
         sx={{
-          
           border: 0,
           "& .MuiDataGrid-columnSeparator": { display: "none" },
           "& .MuiDataGrid-columnHeaders": { borderBottom: "none" },
-          
         }}
       />
 
@@ -225,11 +258,15 @@ export default function TransactionTable({
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <MenuItem onClick={handleCopyId}>
-          <ListItemIcon><ContentCopyIcon fontSize="small" /></ListItemIcon>
+          <ListItemIcon>
+            <ContentCopyIcon fontSize="small" />
+          </ListItemIcon>
           <ListItemText primary="Copy transaction id" />
         </MenuItem>
         <MenuItem onClick={handleRetry}>
-          <ListItemIcon><ReplayIcon fontSize="small" /></ListItemIcon>
+          <ListItemIcon>
+            <ReplayIcon fontSize="small" />
+          </ListItemIcon>
           <ListItemText primary="Retry transaction" />
         </MenuItem>
         <Divider />

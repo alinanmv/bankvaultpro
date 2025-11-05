@@ -9,32 +9,24 @@ import Profile from "@/pages/Profile/ui/page";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-         <LoginPage />
-    ),
+    element: <LoginPage />,
   },
   {
     path: "/dashboard",
-    element: (
-      <DashboardPage/>
-    ),
+    element: <DashboardPage />,
   },
   { path: "*", element: <div>Not found</div> },
-  {path: "/transactions",
-    element:(
-    <Transactions/>
-  )
-  },
+  { path: "/transactions", element: <Transactions /> },
   {
     path: "/reports",
-    element:(<Reports/>)
+    element: <Reports />,
   },
   {
     path: "/settings",
-    element:(<Settings/>)
+    element: <Settings />,
   },
   {
-    path:"/profile",
-    element:(<Profile/>)
-  }
+    path: "/profile",
+    element: <Profile />,
+  },
 ]);
