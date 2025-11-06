@@ -1,3 +1,4 @@
+import React from "react";
 import LoginCard from "@/shared/ui/Card/LoginCard";
 import LoginButton from "@/shared/ui/Button/LoginButton";
 import TextInput from "@/shared/ui/Input/TextInput";
@@ -5,28 +6,51 @@ import { Logo } from "@/shared/ui/Logo/Logo";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material";
 import { Box } from "@mui/material";
-
+import AlertToast from "@/shared/ui/Alerts/Alert";
+import { validateLoginForm } from "../model/validate";
 export default function LoginForm() {
   const theme = useTheme();
   const nav = useNavigate();
-
+  const [username, setUsername] = React.useState(""); // ← добавили
+  const [password, setPassword] = React.useState(""); // ← добавили
+  const [errors, setErrors] = React.useState<{
+    username: any;
+    email?: string;
+    password?: string;
+  }>({});
+  const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const navTimer = React.useRef<number | null>(null);
   const handleLogin = async () => {
+    const validationErrors = validateLoginForm({ username, password });
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) return; // ← если есть ошибки — стоп
+
+    if (loading) return;
+    setLoading(true);
+
     await new Promise((r) => setTimeout(r, 1000));
-    nav("/dashboard", { replace: true });
+
+    setOpen(true);
+
+    navTimer.current = window.setTimeout(() => {
+      nav("/dashboard", { replace: true });
+    }, 1200);
   };
 
   return (
     <div
       className="login-form"
       style={{
-        backgroundColor: theme.palette.background.default, // фон по теме
+        backgroundColor: theme.palette.background.default,
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        color: theme.palette.text.primary, // цвет текста по теме
-        transition: "background-color 0.3s ease, color 0.3s ease", // плавная смена
+        color: theme.palette.text.primary,
+        transition: "background-color 0.3s ease, color 0.3s ease",
       }}
     >
       <LoginCard footer="Enter any username and password to proceed.">
@@ -44,6 +68,7 @@ export default function LoginForm() {
         >
           <Logo />
         </Box>
+
         <div
           style={{
             display: "flex",
@@ -68,15 +93,43 @@ export default function LoginForm() {
             Sign in with your Active Directory credentials.
           </p>
         </div>
-        <TextInput label="AD Username" placeholder="domain\\username" />
+
+        <TextInput
+          label="AD Username"
+          placeholder="domain\\username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          error={!!errors.username}
+          helperText={errors.username}
+        />
         <TextInput
           label="Password"
           type="password"
           placeholder="your AD password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          error={!!errors.password}
+          helperText={errors.password}
         />
 
-        <LoginButton onClick={handleLogin}>Sign In with AD</LoginButton>
+        <LoginButton onClick={handleLogin} disabled={loading}>
+          {loading ? "Signing in…" : "Sign In with AD"}
+        </LoginButton>
       </LoginCard>
+
+      <AlertToast
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Login Successful"
+        description={
+          <>
+            Authenticated via AD. Redirecting to your <br />
+            dashboard.
+          </>
+        }
+        variant="success"
+        autoHideDuration={8000}
+      />
     </div>
   );
 }

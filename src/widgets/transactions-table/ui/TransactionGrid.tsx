@@ -17,7 +17,7 @@ export default function TransactionGrid({ sx }: TransactionGridProps) {
   }, []);
   return (
     <DefaultCard title="Recent Transactions" width="100%" height={675} sx={sx}>
-      <TransactionTable rows={rows} isLoading={loading} />
+      <TransactionTable rows={rows} isLoading={loading} sx={{ mt: 4 }} />
     </DefaultCard>
   );
 }

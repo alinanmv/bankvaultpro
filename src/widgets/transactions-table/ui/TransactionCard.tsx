@@ -13,6 +13,7 @@ export default function TransactionCard({ sx }: TransactionCardProps) {
       title="Recent Transactions"
       description="A quick look at the latest transactions."
       sx={sx}
+      titleSx={{ fontFamily: "Roboto", fontWeight: 500 }}
     >
       <TransactionGrid sx={{ mt: 3 }} />
     </DefaultCard>

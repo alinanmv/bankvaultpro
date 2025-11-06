@@ -1,17 +1,21 @@
 import React from "react";
 import SettingSlider from "@/shared/ui/Lines/SettingSlider";
 import SettingRow from "@/shared/ui/Lines/SettingRow";
-import { Box, type SxProps } from "@mui/material";
+import { Box, type SxProps, useTheme } from "@mui/material";
 interface LogoutDurationProps {
   sx: SxProps;
 }
 export default function LogoutDuration(sx: LogoutDurationProps) {
-  const [opacity, setOpacity] = React.useState(60);
+  const [value, setValue] = React.useState(60);
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   return (
     <>
       <Box
         sx={{
-          borderBottom: "1px solid #eeeeee",
+          borderBottom: `1px solid ${
+            isDark ? theme.palette.grey[900] : "#eeeeee"
+          }`,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -26,9 +30,9 @@ export default function LogoutDuration(sx: LogoutDurationProps) {
           defaultChecked
         />
         <SettingSlider
-          title={`Inactive duration: ${opacity} minutes`}
-          value={opacity}
-          onChange={setOpacity}
+          title={`Inactive duration: ${value} minutes`}
+          value={value}
+          onChange={setValue}
           min={0}
           max={120}
           step={5}

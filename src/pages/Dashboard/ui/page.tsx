@@ -13,7 +13,7 @@ export default function DashboardPage() {
         sx={{
           maxWidth: "1870px",
           margin: "0 auto",
-          pb:3
+          pb: 3,
         }}
       >
         <h1 style={{ fontSize: "1.5rem", fontWeight: "500" }}>Dashboard</h1>

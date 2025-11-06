@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import { useTheme, type SxProps } from "@mui/material/styles";
 
 interface UploadIconProps extends React.SVGProps<SVGSVGElement> {
-  sx?: SxProps; 
+  sx?: SxProps;
 }
 
 export function UploadIcon({ sx, ...props }: UploadIconProps) {

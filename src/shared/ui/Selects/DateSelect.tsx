@@ -3,8 +3,8 @@ import type { SxProps } from "@mui/material/styles";
 
 export interface SimpleDateRangeSelectProps {
   label: string;
-  startDate: string;    // "2025-01-01"
-  endDate: string;      // "2025-01-10"
+  startDate: string; // "2025-01-01"
+  endDate: string; // "2025-01-10"
   onChangeStart: (value: string) => void;
   onChangeEnd: (value: string) => void;
   fullWidth?: boolean;
@@ -24,7 +24,9 @@ export default function SimpleDateRangeSelect({
 }: SimpleDateRangeSelectProps) {
   return (
     <FormControl fullWidth={fullWidth} disabled={disabled} sx={sx}>
-      <FormLabel sx={{ mb: 0.5, color: "text.primary", fontSize: 14, fontWeight: 400 }}>
+      <FormLabel
+        sx={{ mb: 0.5, color: "text.primary", fontSize: 14, fontWeight: 400 }}
+      >
         {label}
       </FormLabel>
 

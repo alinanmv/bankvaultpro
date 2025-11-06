@@ -1,17 +1,18 @@
 import React from "react";
 import DefaultCard from "@/shared/ui/Card/Card";
 import ThemeButton from "@/shared/ui/Button/ThemeButton";
-import {GenericSelect}  from "@/shared/ui/Selects/GenericSelect";
+import { GenericSelect } from "@/shared/ui/Selects/GenericSelect";
 import { Box, useTheme } from "@mui/material";
 import DateSelect from "@/shared/ui/Selects/DateSelect";
 import { UploadIcon } from "@/shared/ui/Icons/Upload";
-
+import AlertToast from "@/shared/ui/Alerts/Alert";
 
 export default function GenerateReport() {
   const [report, setReport] = React.useState("Transaction Summary");
   const [payment, setPayment] = React.useState("All payment Types");
-const [start, setStart] = React.useState("2025-02-01");
-const [end, setEnd] = React.useState("2025-02-10");
+  const [open, setOpen] = React.useState(false);
+  const [start, setStart] = React.useState("2025-02-01");
+  const [end, setEnd] = React.useState("2025-02-10");
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
   return (
@@ -40,13 +41,13 @@ const [end, setEnd] = React.useState("2025-02-10");
               "Revenue by Payment Type",
             ]}
           />
-   <DateSelect
-  label="Date Range"
-  startDate={start}
-  endDate={end}
-  onChangeStart={setStart}
-  onChangeEnd={setEnd}
-/>
+          <DateSelect
+            label="Date Range"
+            startDate={start}
+            endDate={end}
+            onChangeStart={setStart}
+            onChangeEnd={setEnd}
+          />
           <GenericSelect
             label="Payment Method"
             value={payment}
@@ -56,16 +57,37 @@ const [end, setEnd] = React.useState("2025-02-10");
         </Box>
         <Box sx={{ width: "100%", mt: 3 }}>
           <ThemeButton
-            icon={<UploadIcon sx={{color: isDark
-          ? theme.palette.common.black 
-          : theme.palette.white, height:"25px"  }} />}  
+            icon={
+              <UploadIcon
+                sx={{
+                  color: isDark
+                    ? theme.palette.common.black
+                    : theme.palette.white,
+                  height: "25px",
+                }}
+              />
+            }
             height={"40px"}
             label={"Export to Excel"}
-            sx={{ borderRadius: "8px", display:"flex", alignItems:"center" }}
+            sx={{ borderRadius: "8px", display: "flex", alignItems: "center" }}
             width={"100%"}
+            onClick={() => setOpen(true)}
           />
         </Box>
       </DefaultCard>
+      <AlertToast
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Generating Report..."
+        description={
+          <>
+            Your report is being prepared and will download <br />
+            shortly.
+          </>
+        }
+        variant="success"
+        autoHideDuration={4000}
+      />
     </>
   );
 }

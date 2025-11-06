@@ -2,8 +2,13 @@ import DefaultCard from "@/shared/ui/Card/Card";
 import Notification from "@/features/preferences/Notifications";
 import ThemeButton from "@/shared/ui/Button/ThemeButton";
 import LogoutDuration from "@/features/preferences/LogoutDuration";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
+import AlertToast from "@/shared/ui/Alerts/Alert";
+import React from "react";
 export default function PreferencesWidget() {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+  const [open, setOpen] = React.useState(false);
   return (
     <>
       <DefaultCard
@@ -23,7 +28,9 @@ export default function PreferencesWidget() {
           sx={{
             mt: 3,
             paddingBottom: "30px",
-            borderBottom: "1px solid #eeeeee",
+            borderBottom: `1px solid ${
+              isDark ? theme.palette.grey[900] : "#eeeeee"
+            }`,
           }}
         >
           <Notification />
@@ -33,9 +40,23 @@ export default function PreferencesWidget() {
             label="Save Changes"
             sx={{ display: "flex", alignItems: "center" }}
             height="40px"
+            onClick={() => setOpen(true)}
           />
         </Box>
       </DefaultCard>
+      <AlertToast
+        open={open}
+        onClose={() => setOpen(false)}
+        title="Settings Saved!"
+        description={
+          <>
+            Your new preferences have been saved <br />
+            Successfully.
+          </>
+        }
+        variant="success"
+        autoHideDuration={4000}
+      />
     </>
   );
 }
