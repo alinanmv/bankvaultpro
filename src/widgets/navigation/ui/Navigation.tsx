@@ -34,6 +34,7 @@ export default function Navigation() {
         backgroundColor: scrolled ? scrolledBg : baseBg, // <- всегда string
         borderBottom: `1px solid ${alpha(theme.palette.divider, 0.3)}`,
         zIndex: theme.zIndex.appBar + 1,
+        color: theme.palette.text.secondary,
       }}
     >
       <Container maxWidth={false}>

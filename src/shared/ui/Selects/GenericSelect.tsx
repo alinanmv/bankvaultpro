@@ -6,6 +6,7 @@ import {
   MenuItem,
   FormHelperText,
   FormLabel,
+  useTheme
 } from "@mui/material";
 import type { SelectChangeEvent } from "@mui/material/Select";
 import type { SxProps } from "@mui/material/styles";
@@ -42,7 +43,7 @@ export function GenericSelect({
   const baseId = id ?? (label + "-select").replace(/\s+/g, "-").toLowerCase();
   const labelId = `${baseId}-label`;
   const selectId = baseId;
-
+    const theme = useTheme();
   const handleChange = (e: SelectChangeEvent<Value>) => {
     onChange(e.target.value as Value);
   };
@@ -67,7 +68,8 @@ export function GenericSelect({
         value={value}
         onChange={handleChange}
         displayEmpty={Boolean(placeholder)}
-        sx={{ height: 40, fontSize: "15px" }}
+        sx={{ height: 40, fontSize: "15px",           border: `0px solid ${theme.palette.divider}`,
+ }}
         renderValue={(val) => {
           if (val === "" && placeholder) {
             return <Box sx={{ color: "text.disabled" }}>{placeholder}</Box>;

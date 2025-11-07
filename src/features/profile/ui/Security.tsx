@@ -2,12 +2,10 @@ import DefaultCard from "@/shared/ui/Card/Card";
 import SettingRow from "@/shared/ui/Lines/SettingRow";
 import ButtonRow from "@/shared/ui/Lines/ButtonRow";
 import { Box, useTheme } from "@mui/material";
-import React from "react";
-import AlertToast from "@/shared/ui/Alerts/Alert";
+
 export default function Security() {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
-  const [open, setOpen] = React.useState(false);
 
   return (
     <>

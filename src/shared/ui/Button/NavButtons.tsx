@@ -4,10 +4,6 @@ import { Link as RouterLink } from "react-router-dom";
 export default function NavigationButtons() {
   const theme = useTheme();
   const isLight = theme.palette.mode === "light";
-  const textColor =
-    theme.palette.mode === "light"
-      ? theme.palette.text.primary
-      : theme.palette.grey[100];
   return (
     <Box sx={{ display: "flex", gap: 2 }}>
       {mainPages.map((page) => (
@@ -16,13 +12,12 @@ export default function NavigationButtons() {
           component={RouterLink}
           to={page.href}
           sx={{
-            color: textColor,
+            color: theme.palette.text.secondary,
             textTransform: "none",
             fontWeight: 500,
             "&:hover": {
-              background: isLight
-                ? theme.palette.grey[200]
-                : theme.palette.grey[800],
+              color: isLight ? "black" : "white",
+              background: "none",
             },
           }}
         >

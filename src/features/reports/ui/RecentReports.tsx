@@ -28,6 +28,9 @@ export default function RecentReports() {
             icon={<DocumentSVG />}
             title={"failed_transactions_2023-09.xlsx"}
             description={"Generated on 30.09.2023"}
+            showLoading
+            loadingFrom={37}
+            loadingDuration={6000}
           />
           <DownloadRow
             icon={<DocumentSVG />}
@@ -38,6 +41,9 @@ export default function RecentReports() {
             icon={<DocumentSVG />}
             title={"monthly_overview_2023-08.pdf"}
             description={"Generated on 01.09.2023"}
+            showLoading
+            loadingFrom={64}
+            loadingDuration={3000}
           />
           <DownloadRow
             icon={<DocumentSVG />}

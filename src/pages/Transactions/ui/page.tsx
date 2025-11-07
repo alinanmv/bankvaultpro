@@ -1,17 +1,7 @@
-import TransactionTable from "@/features/transactions/TransactionsTable";
 import Navigation from "@/widgets/navigation/ui/Navigation";
 import { Container } from "@mui/material";
-import { fetchTransactionsMock } from "@/shared/api/transactions";
-import React from "react";
+import FilteredTransactions from "@/widgets/transactions/ui/FilteredTransactions";
 export default function Transactions() {
-  const [rows, setRows] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  React.useEffect(() => {
-    fetchTransactionsMock(120).then((data) => {
-      setRows(data);
-      setLoading(false);
-    });
-  }, []);
   return (
     <>
       <Navigation />
@@ -24,7 +14,7 @@ export default function Transactions() {
         }}
       >
         <h1 style={{ fontSize: "1.5rem", fontWeight: "500" }}>Transactions</h1>
-        <TransactionTable rows={rows} isLoading={loading} />
+        <FilteredTransactions />
       </Container>
     </>
   );

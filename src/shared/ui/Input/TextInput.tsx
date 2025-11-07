@@ -46,11 +46,10 @@ export default function TextInput({
           py: 1,
           fontSize: "15px",
           height: "40px",
-          backgroundColor: theme.palette.background.paper,
-          "&::placeholder": {
+  "&::placeholder": {
             color: theme.palette.text.secondary,
             opacity: 1,
-          },
+  },
           "&:focus-within": {
             borderColor: theme.palette.primary.main,
           },
