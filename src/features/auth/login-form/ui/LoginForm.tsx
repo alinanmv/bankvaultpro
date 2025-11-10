@@ -3,41 +3,54 @@ import LoginCard from "@/shared/ui/Card/LoginCard";
 import LoginButton from "@/shared/ui/Button/LoginButton";
 import TextInput from "@/shared/ui/Input/TextInput";
 import { Logo } from "@/shared/ui/Logo/Logo";
-import { useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material";
-import { Box } from "@mui/material";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useTheme, Box } from "@mui/material";
 import AlertToast from "@/shared/ui/Alerts/Alert";
 import { validateLoginForm } from "../model/validate";
+import { setToken } from "@/shared/lib/auth";
+import { clearToken } from "@/shared/lib/auth";
+type LoginErrors = Partial<{ username: string; password: string }>;
+
 export default function LoginForm() {
   const theme = useTheme();
   const nav = useNavigate();
-  const [username, setUsername] = React.useState(""); // ← добавили
-  const [password, setPassword] = React.useState(""); // ← добавили
-  const [errors, setErrors] = React.useState<{
-    username: any;
-    email?: string;
-    password?: string;
-  }>({});
+  const loc = useLocation();
+
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [errors, setErrors] = React.useState<LoginErrors>({});
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const navTimer = React.useRef<number | null>(null);
-  const handleLogin = async () => {
-    const validationErrors = validateLoginForm({ username, password });
-    setErrors(validationErrors);
+const handleLogin = async () => {
+  if (loading) return;
 
-    if (Object.keys(validationErrors).length > 0) return; // ← если есть ошибки — стоп
+  const validationErrors = validateLoginForm({ username, password });
+  setErrors(validationErrors);
+  if (Object.keys(validationErrors).length) return;
 
-    if (loading) return;
-    setLoading(true);
-
+  setLoading(true);
+  try {
     await new Promise((r) => setTimeout(r, 1000));
-
+    setToken(username);
     setOpen(true);
-
+    const from = (loc.state as { from?: string } | null)?.from ?? "/dashboard";
     navTimer.current = window.setTimeout(() => {
-      nav("/dashboard", { replace: true });
-    }, 1200);
+      nav(from, { replace: true });
+    }, 800);
+  } finally {
+    setLoading(false);
+  }
+};
+React.useEffect(() => {
+  return () => {
+    if (navTimer.current) window.clearTimeout(navTimer.current);
   };
+}, []);
+React.useEffect(() => {
+  clearToken();
+}, []);
+
 
   return (
     <div
@@ -101,8 +114,8 @@ export default function LoginForm() {
           onChange={(e) => setUsername(e.target.value)}
           error={!!errors.username}
           helperText={errors.username}
-      
         />
+
         <TextInput
           label="Password"
           type="password"
