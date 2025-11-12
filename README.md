@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# BankVaultPro  
+> Личный финансовый дашборд / аналитика транзакций
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🚀 Описание  
+BankVaultPro — это приложение, разработанное на базе React + TypeScript + Vite, предназначенное для визуализации, анализа и управления банковскими транзакциями и личными финансами.  
+Цель проекта — предоставить пользователю единый интерфейс для мониторинга доходов / расходов, построения отчетов, управления бюджетом и т.д.
 
-Currently, two official plugins are available:
+## 💡 Особенности  
+- Современный стек: React + TypeScript + Vite.  
+- Лёгкая, производительная архитектура с поддержкой HMR.  
+- Настроенный ESLint для обеспечения качества кода.  
+- Продуманная структура проекта (FSD-подход / feature-driven / модульная архитектура).  
+- Поддержка масштабирования: легко добавлять новые метрики, отчёты, интеграции.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧱 Архитектура проекта  
+/public
+/src
+/app — глобальные настройки приложения (сервисы, провайдеры, темы)
+/features — бизнес-функции (Dashboard, Reports, Transactions и т.д.)
+/entities — модели/сущности (например: Transaction, Account, Category)
+/shared — переиспользуемые компоненты UI, утилиты, хуки
+/widgets — составные блоки интерфейса (например: SummaryCard, ChartWidget)
+vite.config.ts
+tsconfig.json
+...
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📦 Установка и запуск  
+1. Склонируйте репозиторий:  
+   ```bash
+   git clone https://github.com/alinanmv/bankvaultpro.git
+   cd bankvaultpro
+2. Установите зависимости:
+   npm install
+3. Запуск в режиме разработки (с HMR):
+   npm run dev
+4. Сборка для продакшена:
+   npm run build
+5. Пред-просмотр сборки:
+   npm run preview
+   
+## 🧪 Тестирование и качество кода
+Используется ESLint & Prettier (или аналог) — для единообразного код-стиля.
+(При необходимости) Добавьте команду запуска тестов:
+npm run test
+Подключите CI (например, GitHub Actions) для автоматической проверки lint / build.
 
-## Expanding the ESLint configuration
+## 🎨 Темы / стилизация
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Поддержка светлой и тёмной темы.
+UI-библиотека / дизайн-система: MUI.
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+## 🔧 Конфигурации
+vite.config.ts — настроен Vite, пути алиасов, оптимизации.
+tsconfig.json — конфигурация TypeScript.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
